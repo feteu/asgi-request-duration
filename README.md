@@ -1,10 +1,12 @@
-[![PyPI version](https://img.shields.io/pypi/v/asgi-request-duration.svg)](https://pypi.org/project/asgi-request-duration/)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/feteu/asgi-request-duration/ci.yml)](https://github.com/feteu/asgi-request-duration/actions)
+[![PyPI - License](https://img.shields.io/pypi/l/asgi-request-duration)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI - Version](https://img.shields.io/pypi/v/asgi-request-duration.svg)](https://pypi.org/project/asgi-request-duration/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/asgi-request-duration)](https://pypi.org/project/asgi-request-duration/)
+[![PyPI - Status](https://img.shields.io/pypi/status/asgi-request-duration)](https://pypi.org/project/asgi-request-duration/)
 [![Dependencies](https://img.shields.io/librariesio/release/pypi/asgi-request-duration)](https://libraries.io/pypi/asgi-request-duration)
 [![Last Commit](https://img.shields.io/github/last-commit/feteu/asgi-request-duration)](https://github.com/feteu/asgi-request-duration/commits/main)
-[![Downloads](https://img.shields.io/pypi/dm/asgi-request-duration)](https://pypi.org/project/asgi-request-duration/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/asgi-request-duration)](https://pypi.org/project/asgi-request-duration/)
+[![Build Status build/testpypi](https://img.shields.io/github/actions/workflow/status/feteu/asgi-request-duration/publish-testpypi.yaml?label=publish-testpypi)](https://github.com/feteu/asgi-request-duration/actions/workflows/publish-testpypi.yaml)
+[![Build Status build/pypi](https://img.shields.io/github/actions/workflow/status/feteu/asgi-request-duration/publish-pypi.yaml?label=publish-pypi)](https://github.com/feteu/asgi-request-duration/actions/workflows/publish-pypi.yaml)
+[![Build Status test](https://img.shields.io/github/actions/workflow/status/feteu/asgi-request-duration/test.yaml?label=test)](https://github.com/feteu/asgi-request-duration/actions/workflows/test.yaml)
 
 # ASGI Request Duration ⏱️
 
