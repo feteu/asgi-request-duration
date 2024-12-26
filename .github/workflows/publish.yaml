@@ -1,0 +1,82 @@
+name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
+
+on:
+  push:
+    tags:
+    - 'v*.*.*'
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
+
+  publish-to-pypi:
+    name: Teleport Python 🐍 Distribution 📦 to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/asgi-request-duration
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Summon the Distribution Artifacts 🧙‍♂️
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Cast the Publish Spell 📦 to PyPI
+      uses: pypa/gh-action-pypi-publish@67339c736fd9354cd4f8cb0b744f2b82a74b5c70
+
+  github-release:
+    name: Enchant the Python 🐍 Distribution 📦 with Sigstore and Upload to GitHub Release
+    needs: publish-to-pypi
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+    - name: Summon the Distribution Artifacts 🧙‍♂️
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Enchant the Artifacts with Sigstore ✨
+      uses: sigstore/gh-action-sigstore-python@f514d46b907ebcd5bedc05145c03b69c1edd8b46
+      with:
+        inputs: >-
+          ./dist/*.tar.gz
+          ./dist/*.whl
+    - name: Create the GitHub Release 🎉
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --notes "" 
+    - name: Upload the Enchanted Artifacts to GitHub Release 🧳
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        gh release upload "$GITHUB_REF_NAME" dist/** --repo "$GITHUB_REPOSITORY"
+
+  publish-to-testpypi:
+    name: Teleport Python 🐍 Distribution 📦 to TestPyPI
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/asgi-request-duration
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Summon the Distribution Artifacts 🧙‍♂️
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Cast the Publish Spell 📦 to TestPyPI
+      uses: pypa/gh-action-pypi-publish@67339c736fd9354cd4f8cb0b744f2b82a74b5c70
+      with:
+        repository-url: https://test.pypi.org/legacy/

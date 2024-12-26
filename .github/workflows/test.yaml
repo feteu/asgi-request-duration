@@ -1,0 +1,43 @@
+on:
+  pull_request:
+  push:
+    branches:
+    - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+        - 3.11
+        - 3.12
+        - 3.13
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "${{ matrix.python-version }}"
+    - name: Create a Python Wonderland 🐍✨
+      run: |
+        python -m venv .venv
+        source .venv/bin/activate
+    - name: Pimp My Pip 🚀🎩
+      run: |
+        source .venv/bin/activate
+        pip install --upgrade pip
+    - name: Dependency Party 🎉📦
+      run: |
+        source .venv/bin/activate
+        pip install poetry
+        rm poetry.lock
+        poetry install --no-interaction --no-root
+    - name: Install the app 📲🚀
+      run: |
+        source .venv/bin/activate
+        poetry install --no-interaction
+    - name: Test Fest 🎈✅
+      run: |
+        source .venv/bin/activate
+        poetry run pytest -c pytest.ini

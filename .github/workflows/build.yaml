@@ -1,0 +1,29 @@
+name: Build Python 🐍 distribution 📦
+
+on: workflow_call
+
+jobs:
+
+  build:
+    name: Build the Magic Python 🧙‍♂️ Distribution 📦
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - name: Set up the Python Wizardry 🧙‍♂️
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.13"
+    - name: Install the Build Potion 🧪
+      run: |
+        pip install build
+    - name: Concoct the Binary Wheel and Source Tarball 🧙‍♀️
+      run: |
+        build
+    - name: Store the Magical Packages 🧳
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
