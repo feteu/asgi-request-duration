@@ -4,7 +4,6 @@ from asgi_request_duration.middleware import RequestDurationMiddleware
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.responses import JSONResponse
-from starlette.testclient import TestClient
 
 
 @pytest.fixture
