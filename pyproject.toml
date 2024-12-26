@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asgi-request-duration"
-version = "1.0.0"
+version = "1.0.1"
 description = "A asgi middleware to measure the request duration"
 authors = ["Fabio Greco <fabio.greco.github@gmail.com>"]
 maintainers = ["Fabio Greco <fabio.greco.github@gmail.com>"]
