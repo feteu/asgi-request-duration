@@ -26,7 +26,8 @@ class RequestDurationFilter(Filter):
         """
         Applies the filter to the given log record.
         
-        This method retrieves the request duration context value using the context key and sets it as an attribute on the log record. If the context key is not found, the default_value is used.
+        This method retrieves the request duration context value using the context key and sets it as an attribute on the log record. 
+        If the context key is not found, the default_value is used.
         
         Args:
             record (LogRecord): The log record to which the filter is applied.
