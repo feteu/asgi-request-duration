@@ -1,8 +1,6 @@
 [![PyPI version](https://img.shields.io/pypi/v/asgi-request-duration.svg)](https://pypi.org/project/asgi-request-duration/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/feteu/asgi-request-duration/ci.yml)](https://github.com/feteu/asgi-request-duration/actions)
-[![Coverage Status](https://img.shields.io/codecov/c/github/feteu/asgi-request-duration)](https://codecov.io/gh/feteu/asgi-request-duration)
-[![Code Quality](https://img.shields.io/codacy/grade/feteu/asgi-request-duration)](https://www.codacy.com/gh/feteu/asgi-request-duration)
 [![Dependencies](https://img.shields.io/librariesio/release/pypi/asgi-request-duration)](https://libraries.io/pypi/asgi-request-duration)
 [![Last Commit](https://img.shields.io/github/last-commit/feteu/asgi-request-duration)](https://github.com/feteu/asgi-request-duration/commits/main)
 [![Downloads](https://img.shields.io/pypi/dm/asgi-request-duration)](https://pypi.org/project/asgi-request-duration/)
