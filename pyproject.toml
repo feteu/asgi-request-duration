@@ -26,6 +26,8 @@ classifiers = [
     'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     'Natural Language :: English',
     'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
     'Programming Language :: Python :: 3.13',
     'Programming Language :: Python',
     'Topic :: Internet :: WWW/HTTP',
@@ -42,7 +44,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = ">=3.11"
 starlette = "^0.42.0"
 
 [tool.poetry.group.dev.dependencies]
