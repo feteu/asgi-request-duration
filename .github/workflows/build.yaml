@@ -21,7 +21,7 @@ jobs:
         pip install build
     - name: Concoct the Binary Wheel and Source Tarball 🧙‍♀️
       run: |
-        build
+        python -m build
     - name: Store the Magical Packages 🧳
       uses: actions/upload-artifact@v4
       with:
