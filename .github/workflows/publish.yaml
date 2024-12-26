@@ -26,7 +26,7 @@ jobs:
         name: python-package-distributions
         path: dist/
     - name: Cast the Publish Spell 📦 to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
+      uses: pypa/gh-action-pypi-publish@67339c736fd9354cd4f8cb0b744f2b82a74b5c70
 
   github-release:
     name: Enchant the Python 🐍 Distribution 📦 with Sigstore and Upload to GitHub Release
@@ -44,7 +44,7 @@ jobs:
         name: python-package-distributions
         path: dist/
     - name: Enchant the Artifacts with Sigstore ✨
-      uses: sigstore/gh-action-sigstore-python@v3.0.0
+      uses: sigstore/gh-action-sigstore-python@f514d46b907ebcd5bedc05145c03b69c1edd8b46
       with:
         inputs: >-
           ./dist/*.tar.gz
