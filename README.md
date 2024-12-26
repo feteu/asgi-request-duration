@@ -113,7 +113,7 @@ Here are complete examples of how to use the middleware with Starlette applicati
 
 ### Requirements
 
-- Python 3.13+
+- Python 3.11+
 - Poetry
 
 ### Setup
