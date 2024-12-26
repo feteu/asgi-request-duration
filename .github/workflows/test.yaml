@@ -32,6 +32,10 @@ jobs:
         source .venv/bin/activate
         pip install poetry
         poetry install --no-interaction --no-root
+    - name: Install the app 📲🚀
+      run: |
+        source .venv/bin/activate
+        poetry install --no-interaction
     - name: Test Fest 🎈✅
       run: |
         source .venv/bin/activate
