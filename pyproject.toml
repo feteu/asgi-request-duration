@@ -45,7 +45,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-starlette = "^0.42.0"
+starlette = "^0.43.0"
 
 [tool.poetry.group.dev.dependencies]
 uvicorn = "*"
