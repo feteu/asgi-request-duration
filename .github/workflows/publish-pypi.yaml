@@ -1,4 +1,4 @@
-name: Publish Python 🐍 distribution 📦 to PyPI and TestPyPI
+name: Publish Python 🐍 distribution 📦 to PyPI
 
 on:
   push:
@@ -59,24 +59,3 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
         gh release upload "$GITHUB_REF_NAME" dist/** --repo "$GITHUB_REPOSITORY"
-
-  publish-to-testpypi:
-    name: Teleport Python 🐍 Distribution 📦 to TestPyPI
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/asgi-request-duration
-    permissions:
-      id-token: write
-
-    steps:
-    - name: Summon the Distribution Artifacts 🧙‍♂️
-      uses: actions/download-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Cast the Publish Spell 📦 to TestPyPI
-      uses: pypa/gh-action-pypi-publish@67339c736fd9354cd4f8cb0b744f2b82a74b5c70
-      with:
-        repository-url: https://test.pypi.org/legacy/
