@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asgi-request-duration"
-version = "0.1.1"
+version = "1.0.0"
 description = "A asgi middleware to measure the request duration"
 authors = ["Fabio Greco <fabio.greco.github@gmail.com>"]
 maintainers = ["Fabio Greco <fabio.greco.github@gmail.com>"]
@@ -19,7 +19,7 @@ keywords = [
     "timing",
 ]
 classifiers = [
-    'Development Status :: 4 - Beta',
+    'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
     'Framework :: FastAPI',
     'Intended Audience :: Developers',
@@ -45,7 +45,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-starlette = "^0.42.0"
+starlette = "^0.43.0"
 
 [tool.poetry.group.dev.dependencies]
 uvicorn = "*"
