@@ -14,17 +14,17 @@ ASGI Request Duration is a middleware for ASGI applications that measures the du
 
 ## Table of Contents 📚
 
-- [Features](#Features)
-- [Installation](#Installation)
-- [Usage](#Usage)
-  - [Middleware](#Middleware)
-  - [Logging Filter](#Logging-Filter)
-  - [Configuration](#Configuration)
-- [Examples](#Examples)
-- [Development](Development)
-- [License](#License)
-- [Contributing](#Contributing)
-- [Contact](#Contact)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Middleware](#middleware)
+  - [Logging Filter](#logging-filter)
+  - [Configuration](#configuration)
+- [Examples](#examples)
+- [Development](#development)
+- [License](#license)
+- [Contributing](#contributing)
+- [Contact](#contact)
 
 ## Features ✨
 
