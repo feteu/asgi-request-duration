@@ -9,7 +9,7 @@ from asgi_request_duration.constants import (
     _PRECISION_MIN,
 )
 
-def validate_header_name(skip=_DEFAULT_SKIP_VALIDATE_HEADER_NAME) -> callable:
+def validate_header_name(skip: bool =_DEFAULT_SKIP_VALIDATE_HEADER_NAME) -> callable:
     """
     Decorator to validate the header name against a pattern.
     
@@ -23,7 +23,7 @@ def validate_header_name(skip=_DEFAULT_SKIP_VALIDATE_HEADER_NAME) -> callable:
     Raises:
         InvalidHeaderNameException: If the header name is invalid.
     """
-    def decorator(func)-> callable:
+    def decorator(func: callable)-> callable:
         def wrapper(*args, **kwargs) -> callable:
             if not skip:
                 header_name = kwargs.get('header_name', _DEFAULT_HEADER_NAME)
@@ -33,7 +33,7 @@ def validate_header_name(skip=_DEFAULT_SKIP_VALIDATE_HEADER_NAME) -> callable:
         return wrapper
     return decorator
 
-def validate_precision(skip=_DEFAULT_SKIP_VALIDATE_PRECISION)-> callable:
+def validate_precision(skip: bool =_DEFAULT_SKIP_VALIDATE_PRECISION)-> callable:
     """
     Decorator to validate the precision value.
     
@@ -47,7 +47,7 @@ def validate_precision(skip=_DEFAULT_SKIP_VALIDATE_PRECISION)-> callable:
     Raises:
         PrecisionValueOutOfRangeException: If the precision value is out of range.
     """
-    def decorator(func) -> callable:
+    def decorator(func: callable) -> callable:
         def wrapper(*args, **kwargs) -> callable:
             if not skip:
                 precision = kwargs.get('precision', _DEFAULT_PRECISION)
