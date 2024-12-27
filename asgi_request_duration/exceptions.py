@@ -4,7 +4,7 @@ class InvalidHeaderNameException(Exception):
     This class represents an error that occurs when an invalid header name is provided.
     It provides a custom description to inform the user about the invalid header name.
     """
-    description = (
+    description: str = (
         "Invalid header name provided. "
         "Please ensure that the header name is correct and try again."
     )
@@ -22,7 +22,7 @@ class PrecisionValueOutOfRangeException(ValueError):
     This class represents an error that occurs when a precision value is out of the allowed range.
     It provides a custom description to inform the user about the out-of-range precision value.
     """
-    description = (
+    description: str = (
         "Precision value is out of range. "
         "Please ensure that the precision value is within the allowed range."
     )
