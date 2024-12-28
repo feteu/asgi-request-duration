@@ -54,13 +54,15 @@ class RequestDurationMiddleware:
             send (Send): The ASGI send callable.
         """
         if scope["type"] not in ("http",):
-            return await self.app(scope, receive, send)
+            await self.app(scope, receive, send)
+            return
         
         time_recording_start = time.perf_counter()
         url = URL(scope=scope)
         
         if self._search_patterns_in_string(url.path, self.excluded_paths_patterns):
-            return await self.app(scope, receive, send)
+            await self.app(scope, receive, send)
+            return
         
         async def wrapped_send(message: Message) -> None:
             """
