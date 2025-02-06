@@ -1,5 +1,5 @@
 from logging import Filter, LogRecord
-from asgi_request_duration.context import REQUEST_DURATION_CTX_KEY, request_duration_ctx_var
+from .context import REQUEST_DURATION_CTX_KEY, request_duration_ctx_var
 
 class RequestDurationFilter(Filter):
     """

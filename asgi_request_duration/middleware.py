@@ -4,9 +4,9 @@ import time
 from dataclasses import dataclass, field
 from starlette.datastructures import MutableHeaders, URL
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
-from asgi_request_duration.context import request_duration_ctx_var
-from asgi_request_duration.decorators import validate_header_name, validate_precision
-from asgi_request_duration.constants import (
+from .context import request_duration_ctx_var
+from .decorators import validate_header_name, validate_precision
+from .constants import (
     _DEFAULT_EXCLUDED_PATHS,
     _DEFAULT_HEADER_NAME,
     _DEFAULT_PRECISION,

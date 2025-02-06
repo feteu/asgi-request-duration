@@ -1,5 +1,5 @@
-from asgi_request_duration.exceptions import InvalidHeaderNameException, PrecisionValueOutOfRangeException
-from asgi_request_duration.constants import (
+from .exceptions import InvalidHeaderNameException, PrecisionValueOutOfRangeException
+from .constants import (
     _DEFAULT_HEADER_NAME,
     _DEFAULT_PRECISION,
     _DEFAULT_SKIP_VALIDATE_HEADER_NAME,
