@@ -1,7 +1,7 @@
 import re
 
 _DEFAULT_EXCLUDED_PATHS: list = []
-_DEFAULT_HEADER_NAME: str = "X-Request-Duration"
+_DEFAULT_HEADER_NAME: str = "x-request-duration"
 _DEFAULT_PRECISION: int = 6
 _DEFAULT_SKIP_VALIDATE_HEADER_NAME: bool = False
 _DEFAULT_SKIP_VALIDATE_PRECISION: bool = False
