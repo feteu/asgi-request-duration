@@ -1,3 +1,4 @@
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/asgi-request-duration.svg)](https://pypi.org/project/asgi-request-duration/)
 [![PyPI - License](https://img.shields.io/pypi/l/asgi-request-duration)](https://www.gnu.org/licenses/gpl-3.0)
 [![PyPI - Version](https://img.shields.io/pypi/v/asgi-request-duration.svg)](https://pypi.org/project/asgi-request-duration/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/asgi-request-duration)](https://pypi.org/project/asgi-request-duration/)
@@ -86,11 +87,11 @@ Example:
 ```python
 app.add_middleware(
     RequestDurationMiddleware,
-    excluded_paths=["/health"],
-    header_name="X-Request-Duration",
+    excluded_paths=["^/health/?$"],
+    header_name="x-request-duration",
     precision=3,
     skip_validate_header_name=False,
-    skip_validate_precision=False
+    skip_validate_precision=False,
 )
 ```
 
