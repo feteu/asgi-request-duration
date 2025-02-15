@@ -1,3 +1,4 @@
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/asgi-request-duration.svg)](https://pypi.org/project/asgi-request-duration/)
 [![PyPI - License](https://img.shields.io/pypi/l/asgi-request-duration)](https://www.gnu.org/licenses/gpl-3.0)
 [![PyPI - Version](https://img.shields.io/pypi/v/asgi-request-duration.svg)](https://pypi.org/project/asgi-request-duration/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/asgi-request-duration)](https://pypi.org/project/asgi-request-duration/)
@@ -12,19 +13,22 @@
 
 ASGI Request Duration is a middleware for ASGI applications that measures the duration of HTTP requests and integrates this information into response headers and log records. This middleware is designed to be easy to integrate and configure, providing valuable insights into the performance of your ASGI application.
 
+> **Note:** If you find this project useful, please consider giving it a star ⭐ on GitHub. This helps prioritize its maintenance and development. If you encounter any typos, bugs 🐛, or have new feature requests, feel free to open an issue. I will be happy to address them.
+
 ## Table of Contents 📚
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Middleware](#middleware)
-  - [Logging Filter](#logging-filter)
-  - [Configuration](#configuration)
-- [Examples](#examples)
-- [Development](#development)
-- [License](#license)
-- [Contributing](#contributing)
-- [Contact](#contact)
+1. [Features ✨](#features-✨)
+2. [Installation 🛠️](#installation-🛠️)
+3. [Usage 🚀](#usage-🚀)
+    1. [Middleware 🧩](#middleware-🧩)
+    2. [Logging Filter 📝](#logging-filter-📝)
+    3. [Configuration ⚙️](#configuration-⚙️)
+      1. [Middleware Configuration 🔧](#middleware-configuration-🔧)
+      2. [Logging Filter Configuration 🔍](#logging-filter-configuration-🔍)
+4. [Examples 📖](#examples-📖)
+    1. [Example with Starlette 🌟](#example-with-starlette-🌟)
+5. [Contributing 🤝](#contributing-🤝)
+6. [License 📜](#license-📜)
 
 ## Features ✨
 
@@ -44,7 +48,7 @@ pip install asgi-request-duration
 
 ## Usage 🚀
 
-### Middleware
+### Middleware 🧩
 
 To use the middleware, add it to your ASGI application:
 
@@ -56,7 +60,7 @@ app = Starlette()
 app.add_middleware(RequestDurationMiddleware)
 ```
 
-### Logging Filter
+### Logging Filter 📝
 
 To use the logging filter, configure your logger to use the `RequestDurationFilter`:
 
@@ -71,7 +75,7 @@ logger.addFilter(RequestDurationFilter())
 
 ### Configuration ⚙️
 
-#### Middleware Configuration
+#### Middleware Configuration 🔧
 
 You can configure the middleware by passing parameters to the `RequestDurationMiddleware`:
 
@@ -86,15 +90,15 @@ Example:
 ```python
 app.add_middleware(
     RequestDurationMiddleware,
-    excluded_paths=["/health"],
-    header_name="X-Request-Duration",
+    excluded_paths=["^/health/?$"],
+    header_name="x-request-duration",
     precision=3,
     skip_validate_header_name=False,
-    skip_validate_precision=False
+    skip_validate_precision=False,
 )
 ```
 
-#### Logging Filter Configuration
+#### Logging Filter Configuration 🔍
 
 You can configure the logging filter by passing parameters to the `RequestDurationFilter`:
 
@@ -109,41 +113,46 @@ logger.addFilter(RequestDurationFilter(context_key="request_duration", default_v
 
 ## Examples 📖
 
-Here are complete examples of how to use the middleware with Starlette applications. You can find the full example code in the [examples](examples) folder.
+Here is a complete example of how to use the middleware with the Starlette framework. For more examples and detailed usage, please refer to the [examples](https://github.com/feteu/asgi-request-duration/tree/main/examples) folder in the repository.
 
-## Development 👩‍💻👨‍💻
+### Example with Starlette 🌟
 
-### Requirements
+```python
+from asgi_request_duration import RequestDurationMiddleware
+from starlette.applications import Starlette
+from starlette.requests import Request
+from starlette.responses import JSONResponse
+from starlette.routing import Route
+from uvicorn import run
 
-- Python 3.11+
-- Poetry
 
-### Setup
+async def info_endpoint(request: Request) -> JSONResponse:
+    return JSONResponse({"message": "info"})
 
-Clone the repository and install the dependencies:
+async def excluded_endpoint(request: Request) -> JSONResponse:
+    return JSONResponse({"message": "excluded"})
 
-```sh
-git clone https://github.com/yourusername/asgi-request-duration.git
-cd asgi-request-duration
-poetry install
+routes = [
+    Route("/info", info_endpoint, methods=["GET"]),
+    Route("/excluded", excluded_endpoint, methods=["GET"]),
+]
+
+app = Starlette(routes=routes)
+app.add_middleware(
+    RequestDurationMiddleware,
+    excluded_paths=["/excluded"],
+    header_name="x-request-duration",
+    precision=4,
+    skip_validate_header_name=False,
+    skip_validate_precision=False,
+)
+
+if __name__ == "__main__":
+    run(app, host='127.0.0.1', port=8000)
 ```
-
-### Running Tests 🧪
-
-You can run the tests using `pytest`:
-
-```sh
-poetry run pytest
-```
-
-## License 📜
-
-This project is licensed under the GNU GPLv3 License. See the [LICENSE](LICENSE) file for more details.
 
 ## Contributing 🤝
+Contributions are welcome! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project.
 
-Contributions are welcome! Please read the [CONTRIBUTING](CONTRIBUTING.md) file for guidelines on how to contribute to this project.
-
-## Contact 📬
-
-For any questions or suggestions, please open an issue on GitHub.
+## License 📜
+This project is licensed under the GNU GPLv3 License. See the [LICENSE](LICENSE) file for more details.
