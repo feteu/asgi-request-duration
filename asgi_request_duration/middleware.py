@@ -10,6 +10,7 @@ from .constants import (
     _DEFAULT_EXCLUDED_PATHS,
     _DEFAULT_HEADER_NAME,
     _DEFAULT_PRECISION,
+    _DEFAULT_TIME_IS_MILLISECONDS,
     _DEFAULT_SKIP_VALIDATE_HEADER_NAME,
     _DEFAULT_SKIP_VALIDATE_PRECISION
 )
@@ -33,6 +34,7 @@ class RequestDurationMiddleware:
     excluded_paths: list[str | None] = field(default_factory=lambda: _DEFAULT_EXCLUDED_PATHS)
     header_name: str = _DEFAULT_HEADER_NAME
     precision: int = _DEFAULT_PRECISION
+    milliseconds: bool = _DEFAULT_TIME_IS_MILLISECONDS
     skip_validate_header_name: bool = _DEFAULT_SKIP_VALIDATE_HEADER_NAME
     skip_validate_precision: bool = _DEFAULT_SKIP_VALIDATE_PRECISION
 
@@ -73,7 +75,8 @@ class RequestDurationMiddleware:
             """
             if message["type"] == "http.response.start":
                 headers = MutableHeaders(scope=message)
-                request_duration_ctx_var.set(f"{time.perf_counter() - time_recording_start:.{self.precision}f}")
+                request_duration = time.perf_counter() - time_recording_start
+                request_duration_ctx_var.set(f"{(request_duration if not self.milliseconds else request_duration * 1000):.{self.precision}f}")
                 headers.append(self.header_name, request_duration_ctx_var.get())
             await send(message)
         
