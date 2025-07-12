@@ -1,6 +1,6 @@
 import os
 import uvicorn
-from asgi_request_duration import RequestDurationMiddleware
+from asgi_request_duration import RequestDurationMiddleware, TimeGranularity
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import JSONResponse
@@ -26,6 +26,7 @@ app.add_middleware(
     precision=4,
     skip_validate_header_name=False,
     skip_validate_precision=False,
+    time_granularity=TimeGranularity.MILLISECONDS,
 )
 
 if __name__ == "__main__":
