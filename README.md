@@ -84,6 +84,7 @@ You can configure the middleware by passing parameters to the `RequestDurationMi
 - `precision`: The precision of the recorded duration.
 - `skip_validate_header_name`: Flag to skip header name validation.
 - `skip_validate_precision`: Flag to skip precision validation.
+- `time_granularity`: Specifies the unit of time measurement (default: `Seconds`).
 
 Example:
 
@@ -95,6 +96,7 @@ app.add_middleware(
     precision=3,
     skip_validate_header_name=False,
     skip_validate_precision=False,
+    time_granularity=TimeGranularity.MILLISECONDS,
 )
 ```
 
@@ -118,7 +120,7 @@ Here is a complete example of how to use the middleware with the Starlette frame
 ### Example with Starlette 🌟
 
 ```python
-from asgi_request_duration import RequestDurationMiddleware
+from asgi_request_duration import RequestDurationMiddleware, TimeGranularity
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import JSONResponse
@@ -145,6 +147,7 @@ app.add_middleware(
     precision=4,
     skip_validate_header_name=False,
     skip_validate_precision=False,
+    time_granularity=TimeGranularity.MILLISECONDS,
 )
 
 if __name__ == "__main__":

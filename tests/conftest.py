@@ -1,6 +1,6 @@
 import logging
 import pytest
-from asgi_request_duration.middleware import RequestDurationMiddleware
+from asgi_request_duration.middleware import RequestDurationMiddleware, TimeGranularity
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import JSONResponse
@@ -84,3 +84,19 @@ def invalid_precision_config_02() -> int:
 @pytest.fixture
 def invalid_precision_config_03() -> float:
     return 3.14159265358979323846
+
+@pytest.fixture
+def valid_time_granularity_config_01() -> TimeGranularity:
+    return TimeGranularity.SECONDS
+
+@pytest.fixture
+def valid_time_granularity_config_02() -> TimeGranularity:
+    return TimeGranularity.MILLISECONDS
+
+@pytest.fixture
+def valid_time_granularity_config_03() -> TimeGranularity:
+    return TimeGranularity.MICROSECONDS
+
+@pytest.fixture
+def valid_time_granularity_config_04() -> TimeGranularity:
+    return TimeGranularity.NANOSECONDS
