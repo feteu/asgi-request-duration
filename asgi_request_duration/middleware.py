@@ -11,8 +11,10 @@ from .constants import (
     _DEFAULT_HEADER_NAME,
     _DEFAULT_PRECISION,
     _DEFAULT_SKIP_VALIDATE_HEADER_NAME,
-    _DEFAULT_SKIP_VALIDATE_PRECISION
+    _DEFAULT_SKIP_VALIDATE_PRECISION,
+    _DEFAULT_TIME_GRANULARITY,
 )
+from .enums import TimeGranularity
 
 log = logging.getLogger(__name__)
 
@@ -20,13 +22,20 @@ log = logging.getLogger(__name__)
 class RequestDurationMiddleware:
     """
     Middleware to measure and record the duration of HTTP requests.
-    
+
     Attributes:
         app (ASGIApp): The ASGI application.
         excluded_paths_patterns (list[re.Pattern]): Compiled regex patterns for paths to exclude from timing.
         excluded_paths (list[str | None]): List of paths to exclude from timing.
         header_name (str): The name of the header to store the request duration.
-        precision (int): The precision of the recorded duration.
+        precision (int): Number of decimal places for the recorded duration value.
+        skip_validate_header_name (bool): If True, skips header name validation.
+        skip_validate_precision (bool): If True, skips precision value validation.
+        time_granularity (TimeGranularity): Specifies the unit for the recorded duration value. Can be:
+            - TimeGranularity.SECONDS (default): duration in seconds
+            - TimeGranularity.MILLISECONDS: duration in milliseconds
+            - TimeGranularity.MICROSECONDS: duration in microseconds
+            - TimeGranularity.NANOSECONDS: duration in nanoseconds
     """
     app: ASGIApp
     excluded_paths_patterns: list[re.Pattern] = field(init=False)
@@ -35,6 +44,7 @@ class RequestDurationMiddleware:
     precision: int = _DEFAULT_PRECISION
     skip_validate_header_name: bool = _DEFAULT_SKIP_VALIDATE_HEADER_NAME
     skip_validate_precision: bool = _DEFAULT_SKIP_VALIDATE_PRECISION
+    time_granularity: TimeGranularity = _DEFAULT_TIME_GRANULARITY
 
     @validate_header_name(skip=skip_validate_header_name)
     @validate_precision(skip=skip_validate_precision)
@@ -73,7 +83,9 @@ class RequestDurationMiddleware:
             """
             if message["type"] == "http.response.start":
                 headers = MutableHeaders(scope=message)
-                request_duration_ctx_var.set(f"{time.perf_counter() - time_recording_start:.{self.precision}f}")
+                request_duration_ctx_var.set(
+                    f"{(time.perf_counter() - time_recording_start) * self.time_granularity.value:.{self.precision}f}"
+                )
                 headers.append(self.header_name, request_duration_ctx_var.get())
             await send(message)
         
